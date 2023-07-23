@@ -1,0 +1,27 @@
+{
+  "name": "react-otio",
+  "version": "0.0.1",
+  "description": "Reusable react components and hooks",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "repository": "https://github.com/olafkotur/react-otio",
+  "author": "olafkotur",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "publish": "npm publish --access public"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "styled-components": "^6.0.5"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "prettier-plugin-organize-imports": "^3.2.3",
+    "rollup": "^3.26.3",
+    "rollup-plugin-typescript2": "^0.35.0",
+    "typescript": "^5.1.6"
+  }
+}
