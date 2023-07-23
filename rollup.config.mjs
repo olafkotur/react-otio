@@ -6,11 +6,13 @@ export default {
     file: 'build/index.js',
     format: 'cjs',
     exports: 'named',
+    sourcemap: true,
+    strict: false,
   },
   plugins: [
     typescript({
       tsconfig: './tsconfig.json',
     }),
   ],
-  external: ['react', 'react-dom'],
+  external: ['react', 'react-dom', 'styled-components'],
 };
