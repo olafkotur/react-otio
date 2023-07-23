@@ -10,7 +10,7 @@
   "private": false,
   "type": "module",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rm -rf ./build && rollup -c",
     "publish": "npm publish --access public"
   },
   "dependencies": {
