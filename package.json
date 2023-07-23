@@ -1,9 +1,9 @@
 {
   "name": "react-otio",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Reusable react components and hooks",
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
   "repository": "https://github.com/olafkotur/react-otio",
   "author": "olafkotur",
   "license": "MIT",
