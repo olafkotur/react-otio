@@ -1,11 +1,12 @@
 /src
 
-rollup.config.mjs
+bob.config.js
 tsconfig.json
 package.json
 
 *.env
 *.gitignore
 *.prettierrc
+*.babelrc
 
-!/build
+!/dist

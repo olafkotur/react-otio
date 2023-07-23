@@ -1,5 +1,3 @@
-// components
-export { Spacer } from './components/Spacer';
+import useOnClickout from './components/use-on-clickout';
 
-// hooks
-export { useOnClickout } from './hooks/use-on-clickout';
+export { useOnClickout };
