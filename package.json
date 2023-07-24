@@ -1,35 +1,28 @@
 {
   "name": "react-otio",
-  "version": "0.0.5",
+  "version": "0.0.12",
   "description": "Reusable react components and hooks",
-  "source": "src/index.ts",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "repository": "https://github.com/olafkotur/react-otio",
   "author": "olafkotur",
   "license": "MIT",
   "private": false,
-  "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "LICENSE",
+    "README.md"
   ],
-  "babel": {
-    "presets": [
-      "@babel/preset-react"
-    ]
-  },
   "scripts": {
-    "build": "rm -rf dist && mkdir dist &&  babel src -d dist --copy-files",
-    "start": "rollup -c -w",
-    "publish": "npm publish --access public"
+    "build": "rm -rf ./dist && tsc",
+    "publish": "npm publish"
   },
   "dependencies": {
     "react": "^18.2.0",
     "styled-components": "^6.0.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.9",
-    "@babel/preset-react": "^7.22.5",
     "@types/react": "^18.2.15",
     "prettier": "^3.0.0",
     "prettier-plugin-organize-imports": "^3.2.3",
