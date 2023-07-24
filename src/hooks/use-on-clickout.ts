@@ -1,6 +1,6 @@
 import { RefObject, useCallback, useEffect } from 'react';
 
-export const useOnClickout = (ignoredRefs: RefObject<Element>[], handler: Function) => {
+export const useOnClickout = ({ ignoredRefs, handler }: { ignoredRefs: RefObject<Element>[]; handler: Function }) => {
   const onMouseDown = useCallback(
     (event: MouseEvent) => {
       const containsIgnored = ignoredRefs.map((ref) => ref.current?.contains(event.target as Element));

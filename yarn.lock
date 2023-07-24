@@ -1163,6 +1163,11 @@ anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
+async-lz-string@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/async-lz-string/-/async-lz-string-1.1.0.tgz#e00d9367b63cfea2934aa8949745719e011ead50"
+  integrity sha512-G9P9rePPYPInY9b79urOA6qWQvj6odVHW/limoCun/+yCX90FFIx8vKoVSALVP437yGZxu2vfoln4tWvIa5yzA==
+
 babel-plugin-polyfill-corejs2@^0.4.4:
   version "0.4.5"
   resolved "https://registry.yarnpkg.com/babel-plugin-polyfill-corejs2/-/babel-plugin-polyfill-corejs2-0.4.5.tgz#8097b4cb4af5b64a1d11332b6fb72ef5e64a054c"
