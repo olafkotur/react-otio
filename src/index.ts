@@ -1,3 +1,2 @@
-export * from './components/Text';
-
-export * from './hooks/use-clipboard-copy';
+export * from './components/index';
+export * from './hooks/index';

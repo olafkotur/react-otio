@@ -8,9 +8,14 @@ import pkg from './package.json' assert { type: 'json' };
 export default {
   input: 'src/index.ts',
   output: [
-    { file: pkg.main, format: 'cjs' },
-    { file: pkg.module, format: 'esm' },
+    { file: pkg.main, format: 'cjs', sourcemap: false },
+    { file: pkg.module, format: 'esm', sourcemap: false },
   ],
+  globals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
+    'styled-components': 'styled',
+  },
   plugins: [
     typescript(),
     babel({

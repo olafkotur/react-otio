@@ -1,7 +1,13 @@
 # Folders
 node_modules
 build
-dist
+
+# package files
+/components
+/hooks
+/index.d.ts
+/index.esm.js
+/index.cjs.js
 
 
 # Output of 'npm pack'
