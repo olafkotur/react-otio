@@ -1,0 +1,57 @@
+{
+  "name": "alto-react",
+  "version": "0.0.0",
+  "description": "",
+  "author": "Olaf Kotur",
+  "type": "module",
+  "main": "build/index.cjs.js",
+  "module": "build/index.esm.js",
+  "scripts": {
+    "start": "storybook dev",
+    "build": "rollup -c",
+    "npm:details": "npm pack --dry-run",
+    "npm:publish": "npm run build && npm publish --access public"
+  },
+  "keywords": [
+    "react",
+    "storybook",
+    "rollup",
+    "boilerplate"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olafkotur/alto-react.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": "20"
+  },
+  "peerDependencies": {
+    "styled-components": "^6.1.8"
+  },
+  "dependencies": {
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-react": "^7.23.3",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@storybook/react-vite": "^7.6.6",
+    "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^4.9.2",
+    "storybook": "^7.6.6",
+    "styled-components": "^6.1.8",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12"
+  },
+  "resolutions": {
+    "jackspeak": "2.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.55"
+  }
+}
