@@ -1,3 +1,4 @@
+import type { Preview } from '@storybook/react';
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
@@ -73,11 +74,9 @@ const Container = styled.div`
   align-items: center;
   height: calc(100vh - 30px);
   width: calc(100vw - 30px);
-  background: ${(props) => props.theme.backgroundColor.primary};
-  border-radius: ${(props) => props.theme.borderRadius.medium};
 `;
 
-export const ThemeDecorator = (Story) => (
+const ThemeDecorator = (Story) => (
   <ThemeProvider theme={Theme}>
     <Container>
       <Story />
@@ -90,7 +89,24 @@ declare module 'styled-components' {
   export interface DefaultTheme extends ThemeType {}
 }
 
-export default {
-  stories: ['**/*.stories.tsx'],
-  framework: { name: '@storybook/react-vite' },
+const preview: Preview = {
+  decorators: [ThemeDecorator],
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+    backgrounds: {
+      default: 'dark',
+      values: [{ name: 'dark', value: '#13121A' }],
+    },
+    actions: { argTypesRegex: '^on[A-Z].*' },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/i,
+      },
+    },
+  },
 };
+
+export default preview;

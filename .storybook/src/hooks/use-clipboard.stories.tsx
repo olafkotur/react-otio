@@ -1,10 +1,8 @@
 import React from 'react';
-import { useClipboardCopy } from '../../src';
-import { ThemeDecorator } from '../main';
+import { useClipboardCopy } from '../../../src';
 
 export default {
-  title: 'Hooks/useClipboardCopy',
-  decorators: [ThemeDecorator],
+  title: 'Hooks/useClipboard',
 };
 
 export const Default = () => {

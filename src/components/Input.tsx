@@ -1,7 +1,7 @@
 import React, { HTMLInputTypeAttribute, ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import { IconButton } from './Button';
-import { ColumnContainer, SpaceBetweenContainer } from './Common';
+import { ColumnContainer, SpaceBetweenContainer } from './Container';
 import { Spacer } from './Spacer';
 import { MediumText } from './Text';
 

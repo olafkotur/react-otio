@@ -5,12 +5,10 @@ import {
   SmallText as SmallTextComponent,
   VeryLargeText as VeryLargeTextComponent,
   VerySmallText as VerySmallTextComponent,
-} from '../../src';
-import { ThemeDecorator } from '../main';
+} from '../../../src';
 
 export default {
   title: 'Components/Text',
-  decorators: [ThemeDecorator],
 };
 
 export const VeryLargeText = () => <VeryLargeTextComponent>Very Large Text</VeryLargeTextComponent>;

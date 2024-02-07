@@ -1,6 +1,6 @@
 {
-  "name": "react-otio-test",
-  "version": "0.0.10",
+  "name": "react-otio",
+  "version": "0.0.0",
   "description": "",
   "type": "module",
   "author": "Olaf Kotur",
@@ -8,8 +8,9 @@
   "types": "build/index.d.ts",
   "module": "build/index.esm.js",
   "scripts": {
-    "start": "storybook dev",
-    "build": "rimraf build && rollup -c"
+    "start": "npx sb dev -p 6006 --ci",
+    "build": "rimraf build && rollup -c",
+    "build-storybook": "storybook build"
   },
   "keywords": [
     "react",
@@ -34,6 +35,9 @@
     "styled-components": "^6.1.8"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@popperjs/core": "^2.11.8",
     "framer-motion": "^11.0.3",
     "react-beautiful-dnd": "^13.1.1"
@@ -47,7 +51,13 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
+    "@storybook/addon-essentials": "^7.6.13",
+    "@storybook/addon-interactions": "^7.6.13",
+    "@storybook/addon-links": "^7.6.13",
+    "@storybook/blocks": "^7.6.13",
+    "@storybook/react": "^7.6.13",
     "@storybook/react-vite": "^7.6.6",
+    "@storybook/test": "^7.6.13",
     "@types/react": "^18.2.55",
     "@types/react-beautiful-dnd": "^13.1.8",
     "npm-run-all": "^4.1.5",
