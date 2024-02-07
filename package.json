@@ -1,6 +1,6 @@
 {
   "name": "react-otio-test",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "",
   "type": "module",
   "author": "Olaf Kotur",
@@ -9,8 +9,7 @@
   "module": "build/index.esm.js",
   "scripts": {
     "start": "npx sb dev -p 6006 --ci",
-    "build": "rimraf build && rollup -c",
-    "build-storybook": "storybook build"
+    "build": "rimraf build && rollup -c"
   },
   "keywords": [
     "react",
