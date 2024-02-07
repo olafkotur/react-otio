@@ -31,7 +31,13 @@ import { Tooltip } from './components/Tooltip';
 // hooks
 import { useBreakpoints } from './hooks/use-breakpoints';
 import { useClipboardCopy } from './hooks/use-clipboard';
-import { useFormatCurrency, useFormatDate, useFormatPercent } from './hooks/use-format';
+import {
+  useFormatCurrency,
+  useFormatDate,
+  useFormatMinutesUntilNextHour,
+  useFormatPercent,
+  useFormatRelativeTime,
+} from './hooks/use-format';
 import { useOnClickout } from './hooks/use-on-clickout';
 import { useOnKeyPress } from './hooks/use-on-keypress';
 import { useClearStorage, useGetStorage, useRemoveStorage, useSetStorage } from './hooks/use-storage';
@@ -83,6 +89,8 @@ const hooks = {
   useFormatDate,
   useFormatCurrency,
   useFormatPercent,
+  useFormatRelativeTime,
+  useFormatMinutesUntilNextHour,
   useOnClickout,
   useOnKeyPress,
   useClearStorage,
@@ -137,7 +145,9 @@ export {
   useClipboardCopy,
   useFormatCurrency,
   useFormatDate,
+  useFormatMinutesUntilNextHour,
   useFormatPercent,
+  useFormatRelativeTime,
   useGetStorage,
   useOnClickout,
   useOnKeyPress,

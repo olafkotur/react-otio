@@ -40,3 +40,28 @@ export const useFormatDate = (format = 'DD/MM/YYYY') => {
     [format],
   );
 };
+
+export const useFormatRelativeTime = () => {
+  return useCallback((date: Date | string) => {
+    const past = new Date(date);
+    const current = new Date();
+    const difference = current.getTime() - past.getTime();
+
+    const seconds = Math.floor(difference / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+    if (hours > 0) return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+    if (minutes > 0) return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+    return `Just now`;
+  }, []);
+};
+
+export const useFormatMinutesUntilNextHour = () => {
+  const date = new Date();
+  const minutes = date.getMinutes();
+  const minutesUntilNextHour = 60 - minutes;
+  return String(minutesUntilNextHour).padStart(2, '0'); // ensures it's always two digits
+};
