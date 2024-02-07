@@ -1,6 +1,6 @@
 import { HTMLMotionProps } from 'framer-motion';
 
-export const Visibility = ({
+export const animateVisibility = ({
   isVisible,
   display = 'flex',
 }: {

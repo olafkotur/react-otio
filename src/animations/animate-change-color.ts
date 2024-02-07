@@ -1,6 +1,6 @@
 import { HTMLMotionProps } from 'framer-motion';
 
-export const ChangeColor = ({
+export const animateChangeColor = ({
   color,
   duration = 0.25,
 }: {

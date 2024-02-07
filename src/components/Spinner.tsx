@@ -1,11 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-interface SpinnerProps {
-  color?: string;
-  size?: string;
-}
-
 const animation = () => keyframes`
   0% {
     transform: rotate(0deg);
@@ -15,7 +10,7 @@ const animation = () => keyframes`
   }
 `;
 
-const SpinnerContainer = styled.div<SpinnerProps>`
+const SpinnerContainer = styled.div<{ color?: string; size?: string }>`
   display: inline-block;
   width: ${(props) => `${props.size}`};
   height: ${(props) => `${props.size}`};
@@ -33,4 +28,6 @@ const SpinnerContainer = styled.div<SpinnerProps>`
   }
 `;
 
-export const Spinner = ({ color, size = '40px' }: SpinnerProps) => <SpinnerContainer color={color} size={size} />;
+export const Spinner = ({ color, size = '40px' }: { color?: string; size?: string }) => (
+  <SpinnerContainer color={color} size={size} />
+);

@@ -1,6 +1,6 @@
 import { HTMLMotionProps } from 'framer-motion';
 
-export const Rotate = ({
+export const animateRotate = ({
   repeat = Infinity,
   duration = 1,
   degrees = 360,

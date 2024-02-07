@@ -2,7 +2,7 @@ import { createPopper } from '@popperjs/core';
 import { motion } from 'framer-motion';
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { Fade } from '../animations';
+import { animateFade } from '../animations/animate-fade';
 
 const TooltipHoverContainer = styled(motion.div)`
   position: absolute;
@@ -47,7 +47,7 @@ export const Tooltip = ({ content, children }: { content: string; children: Reac
     <div ref={childRef} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
       {children}
       {isOpen && (
-        <TooltipHoverContainer ref={tooltipRef} {...Fade({})}>
+        <TooltipHoverContainer ref={tooltipRef} {...animateFade({})}>
           {content}
         </TooltipHoverContainer>
       )}

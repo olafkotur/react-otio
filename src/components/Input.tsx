@@ -7,7 +7,7 @@ import { MediumText } from './Text';
 
 export type SelectOption = { label: string; value: string };
 
-interface InputProps {
+export interface InputProps {
   id?: string;
   placeholder?: string;
   value?: string;

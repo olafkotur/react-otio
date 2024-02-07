@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { Fade } from '../animations';
+import { animateFade } from '../animations/animate-fade';
 
 const CardContainer = styled(motion.div)<{ height?: string; width?: string; center?: boolean }>`
   overflow: hidden;
@@ -39,7 +39,7 @@ export const Card = ({
   scroll?: boolean;
 }): ReactElement => {
   return (
-    <CardContainer height={height} width={width} center={center} {...Fade({})}>
+    <CardContainer height={height} width={width} center={center} {...animateFade({})}>
       <CardContentContainer scroll={scroll}>{children}</CardContentContainer>
     </CardContainer>
   );

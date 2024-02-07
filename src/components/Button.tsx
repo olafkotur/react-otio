@@ -1,10 +1,10 @@
 import { HTMLMotionProps, motion } from 'framer-motion';
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { ScaleOnTap } from '../animations';
+import { animateScaleOnTap } from '../animations/animate-scale-on-tap';
 import { Tooltip } from './Tooltip';
 
-interface ButtonProps extends HTMLMotionProps<'div'> {
+export interface ButtonProps extends HTMLMotionProps<'div'> {
   disabled?: boolean;
   bg?: string;
   size?: number;
@@ -29,7 +29,7 @@ export const Button = ({ ...props }: ButtonProps): ReactElement => {
   return (
     <ButtonContainer
       {...props}
-      {...ScaleOnTap(props.animation ?? {})}
+      {...animateScaleOnTap(props.animation ?? {})}
       role="button"
       onKeyDown={handleKeyDown}
       tabIndex={props.disabled ? -1 : undefined}
