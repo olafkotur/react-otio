@@ -1,6 +1,6 @@
 {
   "name": "react-otio-test",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "",
   "type": "module",
   "author": "Olaf Kotur",
@@ -22,9 +22,6 @@
     "url": "git+https://github.com/olafkotur/react-otio.git"
   },
   "license": "MIT",
-  "engines": {
-    "node": "20"
-  },
   "files": [
     "build"
   ],
