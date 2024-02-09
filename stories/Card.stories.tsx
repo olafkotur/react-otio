@@ -1,8 +1,8 @@
 import React from 'react';
-import { Card } from '../../../src';
+import { Card } from '../src';
 
 export default {
-  title: 'Components/Card',
+  title: 'Card',
 };
 
 export const Default = () => (

@@ -1,10 +1,9 @@
-import { Meta } from '@storybook/react';
 import React from 'react';
-import { DragDrop } from '../../../src';
+import { DragDrop } from '../src';
 
 export default {
-  title: 'Components/DragDrop',
-} as Meta;
+  title: 'DragDrop',
+};
 
 const data = [
   { id: '1', content: 'First' },

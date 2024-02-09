@@ -6,10 +6,10 @@ import {
   RowBetweenContainer as RowBetweenContainerComponent,
   RowContainer as RowContainerComponent,
   SpaceBetweenContainer as SpaceBetweenContainerComponent,
-} from '../../../src';
+} from '../src';
 
 export default {
-  title: 'Components/Container',
+  title: 'Container',
 };
 
 export const CenterContainer = () => (

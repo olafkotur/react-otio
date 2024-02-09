@@ -1,8 +1,8 @@
 import React from 'react';
-import { Spacer } from '../../../src';
+import { Spacer } from '../src';
 
 export default {
-  title: 'Components/Spacer',
+  title: 'Spacer',
 };
 
 export const Vertical = () => (

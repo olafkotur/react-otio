@@ -6,10 +6,10 @@ import {
   IconButton as IconButtonComponent,
   IconName,
   LargeButton as LargeButtonComponent,
-} from '../../../src';
+} from '../src';
 
 export default {
-  title: 'Components/Button',
+  title: 'Button',
 };
 
 const onClick = () => window.alert('Button clicked');

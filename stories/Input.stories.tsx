@@ -5,12 +5,12 @@ import {
   IconName,
   NumberInput as NumberInputComponent,
   TextInput as TextInputComponent,
-} from '../../../src';
+} from '../src';
 
 export default {
-  title: 'Components/Input',
+  title: 'Input',
   decorators: [
-    (Story) => (
+    (Story: React.FC) => (
       <div style={{ width: 200, display: 'flex', flexDirection: 'column' }}>
         <Story />
       </div>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Icon, IconName } from '../../../src';
+import { Icon, IconName } from '../src';
 
 export default {
-  title: 'Components/Icon',
+  title: 'Icon',
 };
 
 export const Default = () => <Icon name={IconName.CODE_BRANCH} color="white" size={50} />;
