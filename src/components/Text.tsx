@@ -7,27 +7,27 @@ const Text = styled.span<{ faint?: boolean; bold?: boolean; italic?: boolean; cu
     if (props.color) {
       return props.color;
     }
-    return props.faint ? props.theme.color.faint : props.theme.color.normal;
+    return props.faint ? props.theme.color.text.faint : props.theme.color.text.normal;
   }};
   cursor: ${(props) => props.cursor ?? 'inherit'};
 `;
 
 export const VeryLargeText = styled(Text)`
-  font-size: ${(props) => props.theme.fontSize.veryLarge};
+  font-size: ${(props) => props.theme.font.veryLarge};
 `;
 
 export const LargeText = styled(Text)`
-  font-size: ${(props) => props.theme.fontSize.large};
+  font-size: ${(props) => props.theme.font.large};
 `;
 
 export const MediumText = styled(Text)`
-  font-size: ${(props) => props.theme.fontSize.medium};
+  font-size: ${(props) => props.theme.font.medium};
 `;
 
 export const SmallText = styled(Text)`
-  font-size: ${(props) => props.theme.fontSize.small};
+  font-size: ${(props) => props.theme.font.small};
 `;
 
 export const VerySmallText = styled(Text)`
-  font-size: ${(props) => props.theme.fontSize.verySmall};
+  font-size: ${(props) => props.theme.font.verySmall};
 `;

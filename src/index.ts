@@ -8,6 +8,7 @@ import { animateVisibility } from './animations/animate-visibility';
 
 // components
 import { Avatar } from './components/Avatar';
+import { Box } from './components/Box';
 import { Button, FilledIconButton, IconButton, LargeButton } from './components/Button';
 import { Card } from './components/Card';
 import {
@@ -81,6 +82,7 @@ const components = {
   SmallText,
   VerySmallText,
   Tooltip,
+  Box,
 };
 
 const hooks = {
@@ -105,6 +107,7 @@ const Otio = { animations, components, hooks };
 export {
   // components
   Avatar,
+  Box,
   Button,
   Card,
   CenterContainer,
