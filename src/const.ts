@@ -71,3 +71,9 @@ export const DefaultThemeOptions = {
     },
   },
 };
+
+export type DefaultThemeOptionsType = typeof DefaultThemeOptions;
+
+declare module 'styled-components' {
+  export interface DefaultTheme extends DefaultThemeOptionsType {}
+}

@@ -51,8 +51,7 @@ import { useClearStorage, useGetStorage, useRemoveStorage, useSetStorage } from 
 import { useUpdateTitle } from './hooks/use-update-title';
 
 // misc
-import { DefaultThemeOptions } from './const';
-import { DefaultThemeOptionsType } from './typings';
+import { DefaultThemeOptions, DefaultThemeOptionsType } from './const';
 
 export {
   // components

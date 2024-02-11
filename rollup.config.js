@@ -17,7 +17,9 @@ export default {
     'styled-components': 'styled',
   },
   plugins: [
-    typescript(),
+    typescript({
+      exclude: ['**/*.test.ts', '**/*.test.tsx', '**/*.stories.tsx'],
+    }),
     babel({
       babelHelpers: 'bundled',
       exclude: 'node_modules/**',
