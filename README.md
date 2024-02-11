@@ -1,5 +1,7 @@
 # React Otio
 
+> :construction: **Disclaimer:** This package is currently under construction. The stable release will be available at v1.0.0.
+
 React Otio is a collection of reusable React components and hooks. It's designed to be simple, lightweight, and performant.
 
 ## Installation

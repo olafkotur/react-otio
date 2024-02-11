@@ -15,7 +15,7 @@ export const Button = () => (
 );
 
 export const IconButton = () => (
-  <IconButtonComponent options={{ size: '100px' }}>
-    <Icon name={IconName.ANCHOR} color="white" size={60} />
+  <IconButtonComponent size="100px">
+    <Icon name={IconName.CODE_BRANCH} />
   </IconButtonComponent>
 );

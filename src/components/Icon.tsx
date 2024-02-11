@@ -1,8 +1,8 @@
-import { IconProp, library } from '@fortawesome/fontawesome-svg-core';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import * as Solid from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { HTMLMotionProps, motion } from 'framer-motion';
-import React, { ReactElement } from 'react';
+import React, { PropsWithChildren, ReactElement } from 'react';
 import styled from 'styled-components';
 
 export enum IconName {
@@ -1364,28 +1364,20 @@ Object.values(IconName).forEach((icon) => {
   library.add(Solid[key as keyof typeof Solid] as Solid.IconDefinition);
 });
 
-const IconContainer = styled(motion.div)<{ size: number; opacity: number; color?: string }>`
-  color: ${(props) => props.color ?? props.theme.color.normal};
-  font-size: ${(props) => props.size}px;
-  opacity: ${(props) => props.opacity};
+export interface IconProps extends HTMLMotionProps<'div'> {
+  name: IconName;
+  size?: string;
+}
+
+const IconContainer = styled(motion.div)<{ size?: string }>`
+  color: ${(props) => props.color ?? props.theme.color.text.normal};
+  font-size: ${(props) => props.size ?? '16px'};
 `;
 
-export const Icon = ({
-  name,
-  color,
-  size,
-  opacity,
-  animation,
-}: {
-  name: IconName;
-  color?: string;
-  size?: number;
-  opacity?: number;
-  animation?: HTMLMotionProps<'div'>;
-}): ReactElement => {
+export const Icon = ({ children, size, name, ...props }: PropsWithChildren<IconProps>): ReactElement => {
   return (
-    <IconContainer {...animation} color={color} size={size ?? 16} opacity={opacity ?? 0.6}>
-      <FontAwesomeIcon icon={name as unknown as IconProp} />
+    <IconContainer size={size} {...props}>
+      <FontAwesomeIcon icon={name as any} />
     </IconContainer>
   );
 };

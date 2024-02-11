@@ -1,170 +1,256 @@
-import React, { HTMLInputTypeAttribute, ReactElement, useState } from 'react';
+import React, { InputHTMLAttributes, ReactElement, useRef, useState } from 'react';
 import styled from 'styled-components';
-// import { IconButton } from './Button';
-import { ColumnContainer, SpaceBetweenContainer } from './Container';
+import { useOnClickout } from '../hooks/use-on-clickout';
+import { Button, IconButton } from './Button';
+import { ColumnContainer, RowContainer, SpaceBetweenContainer } from './Container';
+import { Icon, IconName } from './Icon';
 import { Spacer } from './Spacer';
 import { MediumText } from './Text';
 
-export type SelectOption = { label: string; value: string };
-
-export interface InputProps {
-  id?: string;
-  placeholder?: string;
-  value?: string;
+export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  disabled?: boolean;
-  options?: SelectOption[];
-  bg?: string;
+  color?: string;
+  background?: string;
   icon?: ReactElement;
-  type?: HTMLInputTypeAttribute;
-  autoFocus?: boolean;
-  fontSize?: string;
-  onChange?: (value: string) => void;
-  onBlur?: (value: string) => void;
 }
 
-const InputContainer = styled.div<{ disabled?: boolean; bg?: string; margin?: boolean }>`
-  display: flex;
-  position: relative;
-  align-items: center;
-  padding: ${(props) => props.theme.spacing.medium};
-  background: ${(props) => props.bg ?? props.theme.backgroundColor.primary};
-  filter: drop-shadow(${(props) => props.theme.dropShadow.medium});
-  border-radius: ${(props) => props.theme.borderRadius.medium};
-  opacity: ${(props) => (props.disabled ? 0.4 : 1)};
-`;
-const Input = styled.input<{ fontSize?: string }>`
+export interface NumberInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  color?: string;
+  background?: string;
+  icon?: ReactElement;
+}
+
+export interface FileInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  color?: string;
+  background?: string;
+  disabled?: boolean;
+  icon?: ReactElement;
+}
+
+export interface SelectInputProps {
+  value: string;
+  choices: { value: string; label: string }[];
+  label?: string;
+  color?: string;
+  background?: string;
+  disabled?: boolean;
+  placeholder?: string;
+  icon?: ReactElement;
+  onChange?: (value: string) => void;
+}
+
+const Input = styled.input`
   border: none;
   background: none;
-  color: ${(props) => props.theme.color.normal};
-  font-size: ${(props) => props.fontSize ?? props.theme.fontSize.medium};
+  color: inherit;
+  font-size: inherit;
   width: 100%;
+  display: ${(props) => (props.hidden ? 'none' : 'auto')};
+
   &:focus {
     outline: none;
   }
   &::placeholder {
     font-style: italic;
+    color: ${(props) => props.theme.color.text.faint};
   }
-  ::-webkit-inner-spin-button {
+  &[type='number']::-webkit-inner-spin-button,
+  &[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-`;
-const InputLabelText = styled(MediumText)`
-  margin-left: ${(props) => props.theme.spacing.small};
-  margin-bottom: ${(props) => props.theme.spacing.small};
-`;
-
-export const TextInput = ({
-  id,
-  value,
-  label,
-  placeholder,
-  disabled,
-  bg,
-  icon,
-  type = 'text',
-  autoFocus,
-  fontSize,
-  onChange,
-  onBlur,
-}: InputProps): ReactElement => {
-  return (
-    <ColumnContainer>
-      {label && <InputLabelText faint>{label}</InputLabelText>}
-      <InputContainer disabled={disabled} bg={bg}>
-        {icon}
-        {icon && <Spacer horizontal={5} />}
-        <Input
-          id={id}
-          type={type}
-          value={value}
-          placeholder={placeholder}
-          disabled={disabled}
-          autoFocus={autoFocus}
-          fontSize={fontSize}
-          onChange={(event) => onChange?.(event.target.value)}
-          onBlur={(event) => onBlur?.(event.target.value)}
-        />
-      </InputContainer>
-    </ColumnContainer>
-  );
-};
-
-export const NumberInput = ({
-  id,
-  value,
-  label,
-  placeholder,
-  disabled,
-  bg,
-  icon,
-  onChange,
-  onBlur,
-}: InputProps): ReactElement => {
-  return (
-    <ColumnContainer>
-      {label && <InputLabelText faint>{label}</InputLabelText>}
-      <InputContainer disabled={disabled} bg={bg}>
-        {icon}
-        {icon && <Spacer horizontal={5} />}
-        <Input
-          id={id}
-          type="number"
-          value={value}
-          placeholder={placeholder}
-          disabled={disabled}
-          onChange={(event) => onChange?.(event.target.value)}
-          onBlur={(event) => onBlur?.(event.target.value)}
-        />
-      </InputContainer>
-    </ColumnContainer>
-  );
-};
-
-const FileInputButton = styled.button`
-  padding: 2px;
-  background: transparent;
-
-  &:hover {
-    background: transparent;
+  &[type='number'] {
+    -moz-appearance: textfield;
   }
 `;
 
-export const FileInput = ({ id, value, label, disabled, bg, icon, onChange }: InputProps) => {
-  const [fileName, setFileName] = useState<string | null>(null);
+const Container = styled.div<{ label?: string; background?: string; disabled?: boolean }>`
+  display: flex;
+  align-items: center;
+  height: 60px;
+  position: relative;
+  color: ${(props) => props.color ?? props.theme.color.text.normal};
+  padding: 0 ${(props) => props.theme.spacing.medium};
+  background: ${(props) => props.background ?? props.theme.color.background.secondary};
+  filter: drop-shadow(${(props) => props.theme.shadow.medium});
+  border-radius: ${(props) => props.theme.borderRadius.medium};
+  opacity: ${(props) => (props.disabled ? 0.4 : 1)};
+`;
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+// TODO: the z-index is not working as expected
+const SelectInputListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: calc(100% - (1 * ${(props) => props.theme.spacing.medium}));
+  padding: ${(props) => props.theme.spacing.small};
+  margin-top: ${(props) => props.theme.spacing.small};
+  border-radius: ${(props) => props.theme.borderRadius.medium};
+  background: ${(props) => props.theme.color.background.secondary};
+  z-index: ${(props) => props.theme.zIndex.select};
+`;
+
+const SelectInputOption = styled(MediumText)`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: ${(props) => props.theme.spacing.verySmall};
+  padding: ${(props) => props.theme.spacing.small} ${(props) => props.theme.spacing.medium};
+  background: ${(props) => props.theme.color.background.tertiary};
+  border-radius: ${(props) => props.theme.borderRadius.small};
+
+  &:hover {
+    background: ${(props) => props.theme.color.state.selected};
+  }
+`;
+
+export const TextInput = ({ label, color, background, disabled, icon, ...props }: TextInputProps): ReactElement => {
+  return (
+    <ColumnContainer>
+      {label && (
+        <RowContainer>
+          <Spacer type="horizontal" value={5} />
+          <MediumText faint>{label}</MediumText>
+        </RowContainer>
+      )}
+      <Spacer type="vertical" value={5} />
+      <Container color={color} background={background} disabled={disabled}>
+        {icon && (
+          <RowContainer>
+            {icon}
+            <Spacer type="horizontal" value={10} />
+          </RowContainer>
+        )}
+        <Input {...props} type="text" />
+      </Container>
+    </ColumnContainer>
+  );
+};
+
+export const NumberInput = ({ label, color, background, disabled, icon, ...props }: NumberInputProps): ReactElement => {
+  return (
+    <ColumnContainer>
+      {label && (
+        <RowContainer>
+          <Spacer type="horizontal" value={5} />
+          <MediumText faint>{label}</MediumText>
+        </RowContainer>
+      )}
+      <Spacer type="vertical" value={5} />
+      <Container color={color} background={background} disabled={disabled}>
+        {icon && (
+          <RowContainer>
+            {icon}
+            <Spacer type="horizontal" value={10} />
+          </RowContainer>
+        )}
+        <Input {...props} type="number" />
+      </Container>
+    </ColumnContainer>
+  );
+};
+
+export const FileInput = ({ label, color, background, disabled, icon, ...props }: FileInputProps): ReactElement => {
+  const [value, setValue] = useState<File | null>(null);
+
+  const ref = useRef<HTMLInputElement>(null);
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        onChange?.(reader.result as string);
-        setFileName(file.name);
-      };
-      reader.readAsDataURL(file);
+      setValue(file);
     }
+    props.onChange?.(event);
   };
 
   return (
     <ColumnContainer>
-      {label && <InputLabelText faint>{label}</InputLabelText>}
-      <InputContainer disabled={disabled} bg={bg}>
-        <label htmlFor={`file-input-${id}`}>
-          <FileInputButton tooltip="Upload file">{icon}</FileInputButton>
-        </label>
-        <Spacer horizontal={4} />
+      {label && (
+        <RowContainer>
+          <Spacer type="horizontal" value={5} />
+          <MediumText faint>{label}</MediumText>
+        </RowContainer>
+      )}
+      <Spacer type="vertical" value={5} />
+      <Container color={color} background={background} disabled={disabled}>
+        {icon && (
+          <RowContainer>
+            {icon}
+            <Spacer type="horizontal" value={10} />
+          </RowContainer>
+        )}
+        <Input {...props} hidden type="file" ref={ref} onChange={handleOnChange} multiple={false} />
+        <Button style={{ background: 'none', filter: 'none', padding: 0 }} onClick={() => ref.current?.click()}>
+          <MediumText faint={!value?.name} italic={!value?.name}>
+            {value?.name ?? 'Choose a file'}
+          </MediumText>
+        </Button>
+      </Container>
+    </ColumnContainer>
+  );
+};
+
+export const SelectInput = ({
+  label,
+  color,
+  background,
+  disabled,
+  icon,
+  value,
+  choices,
+  placeholder,
+  onChange,
+}: SelectInputProps): ReactElement => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleSelectOption = (value: string) => {
+    setIsOpen(false);
+    onChange?.(value);
+  };
+
+  useOnClickout([ref], () => setIsOpen(false));
+
+  return (
+    <ColumnContainer ref={ref}>
+      {label && (
+        <RowContainer>
+          <Spacer type="horizontal" value={5} />
+          <MediumText faint>{label}</MediumText>
+        </RowContainer>
+      )}
+      <Spacer type="vertical" value={5} />
+      <Container color={color} background={background} disabled={disabled}>
         <SpaceBetweenContainer>
-          <MediumText>{(fileName ?? value)?.substring(0, 30)}</MediumText>
-          <input
-            type="file"
-            onChange={handleFileChange}
-            style={{ display: 'none' }}
-            id={`file-input-${id}`}
-            accept=".png, .jpg, .jpeg"
-          />
+          <RowContainer>
+            {icon && (
+              <RowContainer>
+                {icon}
+                <Spacer type="horizontal" value={10} />
+              </RowContainer>
+            )}
+            <MediumText faint={!value} italic={!value}>
+              {value || placeholder}
+            </MediumText>
+          </RowContainer>
+          <IconButton onClick={() => setIsOpen(!isOpen)} style={{ background: 'transparent' }} size="20px">
+            <Icon name={isOpen ? IconName.CHEVRON_UP : IconName.CHEVRON_DOWN} />
+          </IconButton>
         </SpaceBetweenContainer>
-      </InputContainer>
+        {isOpen && (
+          <SelectInputListContainer>
+            {choices.map((choice, index) => (
+              <SelectInputOption key={index} onClick={() => handleSelectOption(choice.value)}>
+                {choice.label}
+              </SelectInputOption>
+            ))}
+          </SelectInputListContainer>
+        )}
+      </Container>
     </ColumnContainer>
   );
 };

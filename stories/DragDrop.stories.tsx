@@ -1,5 +1,5 @@
 import React from 'react';
-import { DragDrop } from '../src';
+import { DragDrop } from '../src/components/DragDrop';
 
 export default {
   title: 'DragDrop',
@@ -22,6 +22,10 @@ const onComplete = ({ _id, position }: { _id: string; position: number }) => {
   console.log(`Moved item with id ${_id} to position ${position}`);
 };
 
-export const Default = () => (
-  <DragDrop id="example" uid="id" data={data} onComplete={onComplete} component={Component as any} />
+export const Horizontal = () => (
+  <DragDrop type="horizontal" id="example" uid="id" data={data} onComplete={onComplete} component={Component as any} />
+);
+
+export const Vertical = () => (
+  <DragDrop type="vertical" id="example" uid="id" data={data} onComplete={onComplete} component={Component as any} />
 );

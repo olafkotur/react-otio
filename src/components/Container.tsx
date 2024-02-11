@@ -27,14 +27,17 @@ export const RowBetweenContainer = styled.div`
   align-items: center;
 `;
 
-export const SpaceBetweenContainer = styled(RowContainer)`
+export const SpaceBetweenContainer = styled.div`
+  display: flex;
   width: 100%;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
 `;
 
-export const OverflowTextContainer = styled.div<{ width?: string }>`
+export const OverflowTextContainer = styled.div<{ options?: { width?: string } }>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: ${(props) => props.width ?? '100%'};
+  width: ${({ options }) => options?.width ?? '100%'};
 `;

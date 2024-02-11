@@ -1,12 +1,13 @@
 export const ThemeOptions = {
-  font: {
+  fontFamily: 'Roboto, sans-serif',
+  fontSize: {
     verySmall: '10px',
     small: '14px',
     medium: '16px',
     large: '20px',
     veryLarge: '24px',
   },
-  radius: {
+  borderRadius: {
     small: '5px',
     medium: '10px',
     large: '20px',
@@ -28,6 +29,7 @@ export const ThemeOptions = {
     veryLarge: '30px',
   },
   zIndex: {
+    select: 2500,
     backdrop: 5000,
     panel: 7000,
     modal: 7500,
@@ -57,7 +59,7 @@ export const ThemeOptions = {
       white: 'rgba(236, 240, 241, 1)',
       black: 'rgba(50, 50, 62, 1)',
       link: 'rgba(9, 132, 227, 1)',
-      faint: 'rgba(255, 255, 255, 0.6)',
+      faint: 'rgba(255, 255, 255, 0.4)',
       warning: 'rgba(253, 203, 110, 0.8)',
       success: 'rgba(0, 184, 148, 0.8)',
       danger: 'rgba(214, 48, 49, 0.8)',

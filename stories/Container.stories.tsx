@@ -6,7 +6,7 @@ import {
   RowBetweenContainer as RowBetweenContainerComponent,
   RowContainer as RowContainerComponent,
   SpaceBetweenContainer as SpaceBetweenContainerComponent,
-} from '../src';
+} from '../src/components/Container';
 
 export default {
   title: 'Container',

@@ -14,8 +14,9 @@ const Container = styled.div`
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
-    font-size: ${(props) => props.theme.font.medium};
-    color: ${(props) => props.theme.color.text.normal};
+    font-family: ${({ theme }) => theme.fontFamily};
+    font-size: ${({ theme }) => theme.fontSizemedium};
+    color: ${({ theme }) => theme.color.text.normal};
   }
 `;
 

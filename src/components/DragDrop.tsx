@@ -1,21 +1,33 @@
-import React, { ReactElement, useCallback } from 'react';
+import { HTMLMotionProps, motion } from 'framer-motion';
+import React, { PropsWithChildren, ReactElement, useCallback } from 'react';
 import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd';
+import styled from 'styled-components';
 
-export const DragDrop = ({
-  id,
-  uid,
-  data,
-  component,
-  setIsDragging,
-  onComplete,
-}: {
+export interface DragDropProps extends HTMLMotionProps<'div'> {
+  type: 'horizontal' | 'vertical';
   id: string;
   uid: string;
   data: object[];
   component: (data: object) => ReactElement;
-  setIsDragging?: (value: boolean) => void;
+  setDragging?: (value: boolean) => void;
   onComplete: ({ _id, position }: { _id: string; position: number }) => void;
-}): ReactElement => {
+}
+
+const Container = styled(motion.div)<Pick<DragDropProps, 'type'>>`
+  display: flex;
+  flex-direction: ${(props) => (props.type === 'horizontal' ? 'row' : 'column')};
+`;
+
+export const DragDrop = ({
+  type,
+  id,
+  uid,
+  data,
+  component,
+  setDragging,
+  onComplete,
+  ...props
+}: PropsWithChildren<DragDropProps>): ReactElement => {
   const handleDragEnd = useCallback(
     (result: DropResult) => {
       const { reason, draggableId, destination } = result;
@@ -23,16 +35,16 @@ export const DragDrop = ({
         onComplete({ _id: draggableId, position: destination.index });
       }
 
-      setIsDragging?.(false);
+      setDragging?.(false);
     },
-    [setIsDragging],
+    [setDragging],
   );
 
   return (
-    <DragDropContext onBeforeDragStart={() => setIsDragging?.(true)} onDragEnd={handleDragEnd}>
-      <Droppable droppableId={id} direction="vertical">
+    <DragDropContext onBeforeDragStart={() => setDragging?.(true)} onDragEnd={handleDragEnd}>
+      <Droppable droppableId={id} type={type} direction={type}>
         {(provided) => (
-          <div ref={provided.innerRef}>
+          <Container ref={provided.innerRef} type={type} {...props}>
             {data.map((value: any, index) => (
               <Draggable key={value[uid]} draggableId={value[uid]} index={index}>
                 {(provided) => (
@@ -43,7 +55,7 @@ export const DragDrop = ({
               </Draggable>
             ))}
             {provided.placeholder}
-          </div>
+          </Container>
         )}
       </Droppable>
     </DragDropContext>

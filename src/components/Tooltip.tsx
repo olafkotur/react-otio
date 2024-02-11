@@ -1,22 +1,26 @@
 import { createPopper } from '@popperjs/core';
-import { motion } from 'framer-motion';
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import { HTMLMotionProps, motion } from 'framer-motion';
+import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { animateFade } from '../animations/animate-fade';
 
-const TooltipHoverContainer = styled(motion.div)`
+export interface TooltipProps extends HTMLMotionProps<'div'> {
+  content: string;
+}
+
+const Container = styled(motion.div)`
   position: absolute;
   transform: translate(-50%, 15%);
   min-width: 100px;
   max-width: 200px;
   border-radius: ${(props) => props.theme.borderRadius.medium};
-  padding: ${(props) => props.theme.spacing.medium};
-  background: ${(props) => props.theme.backgroundColor.secondary};
-  filter: drop-shadow(${(props) => props.theme.dropShadow.medium});
+  padding: ${(props) => props.theme.spacing.small};
+  background: ${(props) => props.theme.color.background.tertiary};
+  filter: drop-shadow(${(props) => props.theme.shadow.medium});
   z-index: ${(props) => props.theme.zIndex.tooltip};
 `;
 
-export const Tooltip = ({ content, children }: { content: string; children: ReactElement }): ReactElement => {
+export const Tooltip = ({ children, content, ...props }: PropsWithChildren<TooltipProps>) => {
   const [isOpen, setIsOpen] = useState(false);
   const timeoutId = useRef<NodeJS.Timeout | null>(null);
   const tooltipRef = useRef(null);
@@ -33,7 +37,7 @@ export const Tooltip = ({ content, children }: { content: string; children: Reac
   const handleMouseOver = () => {
     timeoutId.current = setTimeout(() => {
       setIsOpen(true);
-    }, 300);
+    }, 500);
   };
 
   const handleMouseOut = () => {
@@ -47,9 +51,9 @@ export const Tooltip = ({ content, children }: { content: string; children: Reac
     <div ref={childRef} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
       {children}
       {isOpen && (
-        <TooltipHoverContainer ref={tooltipRef} {...animateFade({})}>
+        <Container ref={tooltipRef} {...animateFade({})} {...props}>
           {content}
-        </TooltipHoverContainer>
+        </Container>
       )}
     </div>
   );

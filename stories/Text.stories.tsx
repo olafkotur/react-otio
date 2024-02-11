@@ -5,7 +5,7 @@ import {
   SmallText as SmallTextComponent,
   VeryLargeText as VeryLargeTextComponent,
   VerySmallText as VerySmallTextComponent,
-} from '../src';
+} from '../src/components/Text';
 
 export default {
   title: 'Text',

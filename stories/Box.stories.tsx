@@ -1,12 +1,13 @@
 import React from 'react';
-import { Box, LargeText, MediumText } from '../src';
+import { Box } from '../src/components/Box';
+import { LargeText, MediumText } from '../src/components/Text';
 
 export default {
   title: 'Box',
 };
 
 export const Default = () => (
-  <Box options={{ width: '300px', aspectRatio: '1' }}>
+  <Box style={{ width: '300px', aspectRatio: '1' }}>
     <LargeText bold>Hello World</LargeText>
     <br />
     <MediumText>

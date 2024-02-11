@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tooltip } from '../src';
+import { Tooltip } from '../src/components/Tooltip';
 
 export default {
   title: 'Tooltip',
