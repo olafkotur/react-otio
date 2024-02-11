@@ -9,7 +9,14 @@ import { animateVisibility } from './animations/animate-visibility';
 // components
 import { Avatar, AvatarProps } from './components/Avatar';
 import { Box, BoxProps } from './components/Box';
-import { Button, ButtonProps, IconButton, IconButtonProps } from './components/Button';
+import {
+  Button,
+  ButtonProps,
+  IconButton,
+  IconButtonProps,
+  IconTooltipButton,
+  IconTooltipButtonProps,
+} from './components/Button';
 import {
   CenterContainer,
   ColumnContainer,
@@ -75,6 +82,8 @@ export {
   IconButtonProps,
   IconName,
   IconProps,
+  IconTooltipButton,
+  IconTooltipButtonProps,
   LargeText,
   MediumText,
   NumberInput,

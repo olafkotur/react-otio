@@ -2,10 +2,16 @@ import { HTMLMotionProps, motion } from 'framer-motion';
 import React from 'react';
 import styled from 'styled-components';
 import { animateScaleOnTap } from '../animations/animate-scale-on-tap';
+import { Tooltip } from './Tooltip';
 
 export interface ButtonProps extends HTMLMotionProps<'button'> {}
 
 export interface IconButtonProps extends HTMLMotionProps<'button'> {
+  size?: string;
+}
+
+export interface IconTooltipButtonProps extends HTMLMotionProps<'button'> {
+  content: string;
   size?: string;
 }
 
@@ -49,5 +55,15 @@ export const IconButton = ({ children, size, ...props }: IconButtonProps) => {
     <IconButtonContainer size={size} {...animateScaleOnTap({})} {...props}>
       {children}
     </IconButtonContainer>
+  );
+};
+
+export const IconTooltipButton = ({ children, size, content, ...props }: IconTooltipButtonProps) => {
+  return (
+    <Tooltip content={content}>
+      <IconButtonContainer size={size} {...animateScaleOnTap({})} {...props}>
+        {children}
+      </IconButtonContainer>
+    </Tooltip>
   );
 };

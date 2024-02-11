@@ -1,5 +1,9 @@
 import React from 'react';
-import { Button as ButtonComponent, IconButton as IconButtonComponent } from '../src/components/Button';
+import {
+  Button as ButtonComponent,
+  IconButton as IconButtonComponent,
+  IconTooltipButton as IconTooltipButtonComponent,
+} from '../src/components/Button';
 import { Icon, IconName } from '../src/components/Icon';
 
 export default {
@@ -16,6 +20,12 @@ export const Button = () => (
 
 export const IconButton = () => (
   <IconButtonComponent size="100px">
-    <Icon name={IconName.CODE_BRANCH} />
+    <Icon name={IconName.CODE_BRANCH} size="50px" />
   </IconButtonComponent>
+);
+
+export const IconTooltipButton = () => (
+  <IconTooltipButtonComponent size="100px" content="This is a tooltip">
+    <Icon name={IconName.CODE_BRANCH} size="50px" />
+  </IconTooltipButtonComponent>
 );
