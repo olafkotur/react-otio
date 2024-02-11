@@ -1,4 +1,4 @@
-import { HTMLMotionProps } from 'framer-motion';
+import { MotionProps } from 'framer-motion';
 
 export const animateChangeColor = ({
   color,
@@ -6,7 +6,7 @@ export const animateChangeColor = ({
 }: {
   color: string;
   duration?: number;
-}): HTMLMotionProps<'div'> => {
+}): Partial<MotionProps> => {
   return {
     animate: { color },
     transition: { duration },

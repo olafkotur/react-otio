@@ -1,6 +1,6 @@
-import { HTMLMotionProps } from 'framer-motion';
+import { MotionProps } from 'framer-motion';
 
-export const animateFade = ({ duration = 0.15 }: { duration?: number }): HTMLMotionProps<'div'> => {
+export const animateFade = ({ duration = 0.2 }: { duration?: number }): Partial<MotionProps> => {
   return {
     initial: { opacity: 0 },
     animate: { opacity: 1 },

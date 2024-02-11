@@ -1,4 +1,4 @@
-import { HTMLMotionProps } from 'framer-motion';
+import { MotionProps } from 'framer-motion';
 
 export const animateVisibility = ({
   isVisible,
@@ -6,7 +6,7 @@ export const animateVisibility = ({
 }: {
   isVisible: boolean;
   display?: string;
-}): HTMLMotionProps<'div'> => {
+}): Partial<MotionProps> => {
   return {
     initial: { display: 'none' },
     animate: { display: isVisible ? display : 'none' },

@@ -9,7 +9,7 @@ import { animateVisibility } from './animations/animate-visibility';
 // components
 import { Avatar } from './components/Avatar';
 import { Box } from './components/Box';
-import { Button, FilledIconButton, IconButton, LargeButton } from './components/Button';
+import { Button } from './components/Button';
 import { Card } from './components/Card';
 import {
   CenterContainer,
@@ -56,9 +56,6 @@ const animations = {
 const components = {
   Avatar,
   Button,
-  IconButton,
-  FilledIconButton,
-  LargeButton,
   Card,
   CenterContainer,
   RowContainer,
@@ -114,12 +111,9 @@ export {
   ColumnContainer,
   DragDrop,
   FileInput,
-  FilledIconButton,
   Header,
   Icon,
-  IconButton,
   IconName,
-  LargeButton,
   LargeText,
   Loader,
   MediumText,

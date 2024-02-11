@@ -1,4 +1,4 @@
-import { HTMLMotionProps } from 'framer-motion';
+import { MotionProps } from 'framer-motion';
 
 export const animateRotate = ({
   repeat = Infinity,
@@ -8,7 +8,7 @@ export const animateRotate = ({
   repeat?: number;
   duration?: number;
   degrees?: number;
-}): HTMLMotionProps<'div'> => {
+}): Partial<MotionProps> => {
   return {
     initial: { rotate: 0 },
     animate: { rotate: degrees },

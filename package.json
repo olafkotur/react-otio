@@ -8,7 +8,7 @@
   "types": "build/index.d.ts",
   "module": "build/index.esm.js",
   "scripts": {
-    "start": "npx sb dev -p 6006 --ci",
+    "start": "npx sb dev -p 3000 --ci",
     "build": "rimraf build && rollup -c"
   },
   "keywords": [

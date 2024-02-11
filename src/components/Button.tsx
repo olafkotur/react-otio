@@ -1,91 +1,61 @@
 import { HTMLMotionProps, motion } from 'framer-motion';
-import React, { ReactElement } from 'react';
-import styled from 'styled-components';
+import React from 'react';
+import styled, { CSSProperties } from 'styled-components';
 import { animateScaleOnTap } from '../animations/animate-scale-on-tap';
-import { Tooltip } from './Tooltip';
 
-export interface ButtonProps extends HTMLMotionProps<'div'> {
-  disabled?: boolean;
-  bg?: string;
-  size?: number;
-  width?: string;
-  animation?: { depth: number };
-  tooltip?: string;
+export interface ButtonProps extends HTMLMotionProps<'button'> {
+  options?: {
+    background?: string;
+    opacity?: number;
+    padding?: string;
+    borderRadius?: string;
+    cursor?: CSSProperties['cursor'];
+  };
 }
 
-const ButtonContainer = styled(motion.div)<{ disabled?: boolean }>`
-  cursor: pointer;
-  opacity: ${(props) => (props.disabled ? 0.4 : 1)};
-  pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};
-  filter: drop-shadow(${(props) => props.theme.dropShadow.medium});
+export interface IconButtonProps extends HTMLMotionProps<'button'> {
+  options?: {
+    size?: string;
+    background?: string;
+    opacity?: number;
+    padding?: string;
+    borderRadius?: string;
+    cursor?: CSSProperties['cursor'];
+  };
+}
+
+const ButtonContainer = styled(motion.button)<Pick<ButtonProps, 'options'>>`
+  border: none;
+  cursor: ${({ options }) => options?.cursor ?? 'pointer'};
+  opacity: ${({ options }) => (options?.opacity ? options.opacity : 1)};
+  padding: ${({ options, theme }) => options?.padding ?? theme.spacing.small};
+  border-radius: ${({ options, theme }) => options?.borderRadius ?? theme.radius.small};
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
+  background: ${({ options, theme }) => options?.background ?? theme.color.background.secondary};
+  filter: drop-shadow(${({ theme }) => theme.shadow.medium});
 `;
 
-export const Button = ({ ...props }: ButtonProps): ReactElement => {
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key !== 'Enter' || props.disabled) return;
-    props.onClick?.(event as any);
-  };
-
+export const Button = ({ children, options, ...props }: ButtonProps) => {
   return (
-    <ButtonContainer
-      {...props}
-      {...animateScaleOnTap(props.animation ?? {})}
-      role="button"
-      onKeyDown={handleKeyDown}
-      tabIndex={props.disabled ? -1 : undefined}
-    />
+    <ButtonContainer options={options} {...animateScaleOnTap({})} {...props}>
+      {children}
+    </ButtonContainer>
   );
 };
 
-const IconButtonContainer = styled(Button)`
+const IconButtonContainer = styled(Button)<Pick<IconButtonProps, 'options'>>`
   display: flex;
   align-items: center;
-  aspect-ratio: 1 / 1;
+  justify-content: center;
   overflow: hidden;
-  justify-content: center;
-  background: ${(props) => props.bg ?? ''};
-  padding: ${(props) => props.theme.spacing.small};
-  border-radius: ${(props) => props.theme.borderRadius.small};
-  width: ${(props) => `${props.size}px` ?? 'auto'};
-
-  &:hover {
-    background: ${(props) => props.theme.backgroundColor.selected};
-  }
+  aspect-ratio: 1 / 1;
+  width: ${({ options }) => `${options?.size}` ?? 'auto'};
 `;
 
-export const IconButton = ({ ...props }: ButtonProps): ReactElement => {
-  if (props.tooltip && props.disabled !== true) {
-    return (
-      <Tooltip content={props.tooltip}>
-        <IconButtonContainer {...props}>{props.children}</IconButtonContainer>
-      </Tooltip>
-    );
-  }
-  return <IconButtonContainer {...props}>{props.children}</IconButtonContainer>;
-};
-
-const FilledIconButtonContainer = styled(IconButton)<{ bg?: string; size?: number }>`
-  width: ${(props) => props.size ?? 25}px;
-  height: ${(props) => props.size ?? 25}px;
-  border-radius: ${(props) => props.theme.borderRadius.medium};
-  background: ${(props) => props.bg ?? props.theme.backgroundColor.secondary};
-`;
-
-export const FilledIconButton = ({ ...props }: ButtonProps): ReactElement => {
-  return <FilledIconButtonContainer {...props}>{props.children}</FilledIconButtonContainer>;
-};
-
-const LargeButtonContainer = styled(Button)<{ bg?: string }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  min-width: 80px;
-  width: ${(props) => props.width ?? ''};
-  border-radius: ${(props) => props.theme.borderRadius.medium};
-  background: ${(props) => props.bg ?? props.theme.backgroundColor.secondary};
-`;
-
-export const LargeButton = ({ ...props }: ButtonProps): ReactElement => {
-  return <LargeButtonContainer {...props}>{props.children}</LargeButtonContainer>;
+export const IconButton = ({ children, options, ...props }: IconButtonProps) => {
+  return (
+    <IconButtonContainer options={options} {...animateScaleOnTap({})} {...props}>
+      {children}
+    </IconButtonContainer>
+  );
 };

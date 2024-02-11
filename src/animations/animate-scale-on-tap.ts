@@ -1,6 +1,6 @@
-import { HTMLMotionProps } from 'framer-motion';
+import { MotionProps } from 'framer-motion';
 
-export const animateScaleOnTap = ({ depth = 0.99 }: { depth?: number }): HTMLMotionProps<'div'> => {
+export const animateScaleOnTap = ({ depth = 0.99 }: { depth?: number }): Partial<MotionProps> => {
   return {
     whileTap: { scale: depth },
   };

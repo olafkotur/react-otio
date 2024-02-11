@@ -1,6 +1,6 @@
 import React, { HTMLInputTypeAttribute, ReactElement, useState } from 'react';
 import styled from 'styled-components';
-import { IconButton } from './Button';
+// import { IconButton } from './Button';
 import { ColumnContainer, SpaceBetweenContainer } from './Container';
 import { Spacer } from './Spacer';
 import { MediumText } from './Text';
@@ -122,7 +122,7 @@ export const NumberInput = ({
   );
 };
 
-const FileInputButton = styled(IconButton)`
+const FileInputButton = styled.button`
   padding: 2px;
   background: transparent;
 
