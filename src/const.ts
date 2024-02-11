@@ -1,4 +1,4 @@
-export const ThemeOptions = {
+export const DefaultThemeOptions = {
   fontFamily: 'Roboto, sans-serif',
   fontSize: {
     verySmall: '10px',

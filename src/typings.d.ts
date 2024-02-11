@@ -1,8 +1,8 @@
 import 'styled-components';
-import { ThemeOptions } from './const';
+import { DefaultThemeOptions } from './const';
 
-export type ThemeOptionsType = typeof ThemeOptions;
+export type DefaultThemeOptionsType = typeof DefaultThemeOptions;
 
 declare module 'styled-components' {
-  export interface DefaultTheme extends ThemeOptionsType {}
+  export interface DefaultTheme extends DefaultThemeOptionsType {}
 }

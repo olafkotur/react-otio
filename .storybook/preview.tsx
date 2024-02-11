@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/react';
 import React from 'react';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
-import { ThemeOptions } from '../src/const';
+import { DefaultThemeOptions } from '../src/const';
 
 const Container = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const ThemeDecorator = (Story: React.FC) => (
-  <ThemeProvider theme={ThemeOptions}>
+  <ThemeProvider theme={DefaultThemeOptions}>
     <Container>
       <GlobalStyle />
       <Story />
