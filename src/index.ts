@@ -31,6 +31,8 @@ import { Icon, IconName, IconProps } from './components/Icon';
 import { Image, ImageProps } from './components/Image';
 import { Info, InfoProps } from './components/Info';
 import {
+  CheckboxInput,
+  CheckboxInputProps,
   FileInput,
   FileInputProps,
   NumberInput,
@@ -71,6 +73,8 @@ export {
   Button,
   ButtonProps,
   CenterContainer,
+  CheckboxInput,
+  CheckboxInputProps,
   ColumnContainer,
   DefaultThemeOptions,
   DefaultThemeOptionsType,

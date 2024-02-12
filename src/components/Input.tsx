@@ -1,4 +1,4 @@
-import React, { CSSProperties, InputHTMLAttributes, ReactElement, useRef, useState } from 'react';
+import React, { CSSProperties, InputHTMLAttributes, ReactElement, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useOnClickout } from '../hooks/use-on-clickout';
 import { Button, IconButton } from './Button';
@@ -148,7 +148,7 @@ export const TextInput = ({
             <Spacer type="horizontal" value={10} />
           </RowContainer>
         )}
-        <Input {...props} type="text" />
+        <Input type="text" {...props} />
       </Container>
     </ColumnContainer>
   );
@@ -179,7 +179,7 @@ export const NumberInput = ({
             <Spacer type="horizontal" value={10} />
           </RowContainer>
         )}
-        <Input {...props} type="number" />
+        <Input type="number" {...props} />
       </Container>
     </ColumnContainer>
   );
@@ -249,6 +249,8 @@ export const SelectInput = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
+  const selectedChoice = useMemo(() => choices.find((choice) => choice.value === value), [choices, value]);
+
   const handleSelectOption = (value: string) => {
     setIsOpen(false);
     onChange?.(value);
@@ -275,7 +277,7 @@ export const SelectInput = ({
               </RowContainer>
             )}
             <MediumText faint={!value} italic={!value}>
-              {value || placeholder}
+              {selectedChoice?.label || placeholder}
             </MediumText>
           </RowContainer>
           <IconButton onClick={() => setIsOpen(!isOpen)} style={{ background: 'transparent' }} size="20px">
