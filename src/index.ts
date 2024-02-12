@@ -20,6 +20,7 @@ import {
 import {
   CenterContainer,
   ColumnContainer,
+  FullContainer,
   OverflowTextContainer,
   RowBetweenContainer,
   RowContainer,
@@ -27,6 +28,8 @@ import {
 } from './components/Container';
 import { DragDrop, DragDropProps } from './components/DragDrop';
 import { Icon, IconName, IconProps } from './components/Icon';
+import { Image, ImageProps } from './components/Image';
+import { Info, InfoProps } from './components/Info';
 import {
   FileInput,
   FileInputProps,
@@ -57,11 +60,10 @@ import { useOnKeyPress } from './hooks/use-on-keypress';
 import { useClearStorage, useGetStorage, useRemoveStorage, useSetStorage } from './hooks/use-storage';
 import { useUpdateTitle } from './hooks/use-update-title';
 
-// misc
+// const
 import { DefaultThemeOptions, DefaultThemeOptionsType } from './const';
 
 export {
-  // components
   Avatar,
   AvatarProps,
   Box,
@@ -70,13 +72,13 @@ export {
   ButtonProps,
   CenterContainer,
   ColumnContainer,
-  // misc
   DefaultThemeOptions,
   DefaultThemeOptionsType,
   DragDrop,
   DragDropProps,
   FileInput,
   FileInputProps,
+  FullContainer,
   Icon,
   IconButton,
   IconButtonProps,
@@ -84,6 +86,10 @@ export {
   IconProps,
   IconTooltipButton,
   IconTooltipButtonProps,
+  Image,
+  ImageProps,
+  Info,
+  InfoProps,
   LargeText,
   MediumText,
   NumberInput,
@@ -106,14 +112,12 @@ export {
   TooltipProps,
   VeryLargeText,
   VerySmallText,
-  // animations
   animateChangeColor,
   animateFade,
   animateRotate,
   animateScaleOnTap,
   animateSlide,
   animateVisibility,
-  // hooks
   useBreakpoints,
   useClearStorage,
   useClipboardCopy,

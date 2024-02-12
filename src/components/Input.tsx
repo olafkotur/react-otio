@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, ReactElement, useRef, useState } from 'react';
+import React, { CSSProperties, InputHTMLAttributes, ReactElement, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useOnClickout } from '../hooks/use-on-clickout';
 import { Button, IconButton } from './Button';
@@ -12,6 +12,7 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   color?: string;
   background?: string;
   icon?: ReactElement;
+  containerStyle?: CSSProperties;
 }
 
 export interface NumberInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -19,6 +20,7 @@ export interface NumberInputProps extends InputHTMLAttributes<HTMLInputElement> 
   color?: string;
   background?: string;
   icon?: ReactElement;
+  containerStyle?: CSSProperties;
 }
 
 export interface FileInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -27,6 +29,7 @@ export interface FileInputProps extends InputHTMLAttributes<HTMLInputElement> {
   background?: string;
   disabled?: boolean;
   icon?: ReactElement;
+  containerStyle?: CSSProperties;
 }
 
 export interface SelectInputProps {
@@ -38,7 +41,20 @@ export interface SelectInputProps {
   disabled?: boolean;
   placeholder?: string;
   icon?: ReactElement;
+  containerStyle?: CSSProperties;
   onChange?: (value: string) => void;
+}
+
+export interface CheckboxInputProps {
+  name: string;
+  checked: boolean;
+  label?: string;
+  color?: string;
+  background?: string;
+  disabled?: boolean;
+  icon?: ReactElement;
+  containerStyle?: CSSProperties;
+  onChange?: (checked: boolean) => void;
 }
 
 const Input = styled.input`
@@ -70,7 +86,6 @@ const Container = styled.div<{ label?: string; background?: string; disabled?: b
   display: flex;
   align-items: center;
   height: 60px;
-  position: relative;
   color: ${(props) => props.color ?? props.theme.color.text.normal};
   padding: 0 ${(props) => props.theme.spacing.medium};
   background: ${(props) => props.background ?? props.theme.color.background.secondary};
@@ -79,16 +94,16 @@ const Container = styled.div<{ label?: string; background?: string; disabled?: b
   opacity: ${(props) => (props.disabled ? 0.4 : 1)};
 `;
 
-// TODO: the z-index is not working as expected
-const SelectInputListContainer = styled.div`
+const SelectInputListContainer = styled.div<{ height: number; width: number; label: boolean }>`
   display: flex;
   flex-direction: column;
   position: absolute;
-  right: 0;
-  top: 100%;
-  width: calc(100% - (1 * ${(props) => props.theme.spacing.medium}));
+  margin-top: calc(
+    ${(props) => props.height}px + ${(props) => props.theme.spacing.small} +
+      ${(props) => (props.label ? '18px' : '0px')}
+  );
+  width: calc(${(props) => props.width}px - (1 * ${(props) => props.theme.spacing.medium}));
   padding: ${(props) => props.theme.spacing.small};
-  margin-top: ${(props) => props.theme.spacing.small};
   border-radius: ${(props) => props.theme.borderRadius.medium};
   background: ${(props) => props.theme.color.background.secondary};
   z-index: ${(props) => props.theme.zIndex.select};
@@ -108,7 +123,15 @@ const SelectInputOption = styled(MediumText)`
   }
 `;
 
-export const TextInput = ({ label, color, background, disabled, icon, ...props }: TextInputProps): ReactElement => {
+export const TextInput = ({
+  label,
+  color,
+  background,
+  disabled,
+  icon,
+  containerStyle,
+  ...props
+}: TextInputProps): ReactElement => {
   return (
     <ColumnContainer>
       {label && (
@@ -118,7 +141,7 @@ export const TextInput = ({ label, color, background, disabled, icon, ...props }
         </RowContainer>
       )}
       <Spacer type="vertical" value={5} />
-      <Container color={color} background={background} disabled={disabled}>
+      <Container color={color} background={background} disabled={disabled} style={containerStyle}>
         {icon && (
           <RowContainer>
             {icon}
@@ -131,7 +154,15 @@ export const TextInput = ({ label, color, background, disabled, icon, ...props }
   );
 };
 
-export const NumberInput = ({ label, color, background, disabled, icon, ...props }: NumberInputProps): ReactElement => {
+export const NumberInput = ({
+  label,
+  color,
+  background,
+  disabled,
+  icon,
+  containerStyle,
+  ...props
+}: NumberInputProps): ReactElement => {
   return (
     <ColumnContainer>
       {label && (
@@ -141,7 +172,7 @@ export const NumberInput = ({ label, color, background, disabled, icon, ...props
         </RowContainer>
       )}
       <Spacer type="vertical" value={5} />
-      <Container color={color} background={background} disabled={disabled}>
+      <Container color={color} background={background} disabled={disabled} style={containerStyle}>
         {icon && (
           <RowContainer>
             {icon}
@@ -154,7 +185,15 @@ export const NumberInput = ({ label, color, background, disabled, icon, ...props
   );
 };
 
-export const FileInput = ({ label, color, background, disabled, icon, ...props }: FileInputProps): ReactElement => {
+export const FileInput = ({
+  label,
+  color,
+  background,
+  disabled,
+  icon,
+  containerStyle,
+  ...props
+}: FileInputProps): ReactElement => {
   const [value, setValue] = useState<File | null>(null);
 
   const ref = useRef<HTMLInputElement>(null);
@@ -176,7 +215,7 @@ export const FileInput = ({ label, color, background, disabled, icon, ...props }
         </RowContainer>
       )}
       <Spacer type="vertical" value={5} />
-      <Container color={color} background={background} disabled={disabled}>
+      <Container color={color} background={background} disabled={disabled} style={containerStyle}>
         {icon && (
           <RowContainer>
             {icon}
@@ -203,9 +242,11 @@ export const SelectInput = ({
   value,
   choices,
   placeholder,
+  containerStyle,
   onChange,
 }: SelectInputProps): ReactElement => {
   const ref = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelectOption = (value: string) => {
@@ -224,7 +265,7 @@ export const SelectInput = ({
         </RowContainer>
       )}
       <Spacer type="vertical" value={5} />
-      <Container color={color} background={background} disabled={disabled}>
+      <Container color={color} background={background} disabled={disabled} style={containerStyle} ref={containerRef}>
         <SpaceBetweenContainer>
           <RowContainer>
             {icon && (
@@ -241,15 +282,59 @@ export const SelectInput = ({
             <Icon name={isOpen ? IconName.CHEVRON_UP : IconName.CHEVRON_DOWN} />
           </IconButton>
         </SpaceBetweenContainer>
-        {isOpen && (
-          <SelectInputListContainer>
-            {choices.map((choice, index) => (
-              <SelectInputOption key={index} onClick={() => handleSelectOption(choice.value)}>
-                {choice.label}
-              </SelectInputOption>
-            ))}
-          </SelectInputListContainer>
+      </Container>
+      {isOpen && containerRef.current && (
+        <SelectInputListContainer
+          width={containerRef.current.clientWidth}
+          height={containerRef.current.clientHeight}
+          label={!!label}
+        >
+          {choices.map((choice, index) => (
+            <SelectInputOption key={index} onClick={() => handleSelectOption(choice.value)}>
+              {choice.label}
+            </SelectInputOption>
+          ))}
+        </SelectInputListContainer>
+      )}
+    </ColumnContainer>
+  );
+};
+
+export const CheckboxInput = ({
+  name,
+  checked,
+  label,
+  color,
+  background,
+  disabled,
+  icon,
+  containerStyle,
+  onChange,
+}: CheckboxInputProps): ReactElement => {
+  return (
+    <ColumnContainer>
+      {label && (
+        <RowContainer>
+          <Spacer type="horizontal" value={5} />
+          <MediumText faint>{label}</MediumText>
+        </RowContainer>
+      )}
+      <Spacer type="vertical" value={5} />
+      <Container color={color} background={background} disabled={disabled} style={containerStyle}>
+        {icon && (
+          <RowContainer>
+            {icon}
+            <Spacer type="horizontal" value={10} />
+          </RowContainer>
         )}
+        <SpaceBetweenContainer>
+          <MediumText faint italic>
+            {name}
+          </MediumText>
+          <IconButton style={{ background: 'none' }} disabled={disabled} onClick={() => onChange?.(!checked)}>
+            <Icon name={checked ? IconName.SQUARE_CHECK : IconName.SQUARE} size="24px" />
+          </IconButton>
+        </SpaceBetweenContainer>
       </Container>
     </ColumnContainer>
   );

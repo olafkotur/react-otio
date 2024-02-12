@@ -21,21 +21,21 @@ const Text = styled.span<Pick<TextProps, 'faint' | 'bold' | 'italic' | 'cursor'>
 `;
 
 export const VeryLargeText = styled(Text)`
-  font-size: ${(props) => props.theme.fontSizeveryLarge};
+  font-size: ${(props) => props.theme.fontSize.veryLarge};
 `;
 
 export const LargeText = styled(Text)`
-  font-size: ${(props) => props.theme.fontSizelarge};
+  font-size: ${(props) => props.theme.fontSize.large};
 `;
 
 export const MediumText = styled(Text)`
-  font-size: ${(props) => props.theme.fontSizemedium};
+  font-size: ${(props) => props.theme.fontSize.medium};
 `;
 
 export const SmallText = styled(Text)`
-  font-size: ${(props) => props.theme.fontSizesmall};
+  font-size: ${(props) => props.theme.fontSize.small};
 `;
 
 export const VerySmallText = styled(Text)`
-  font-size: ${(props) => props.theme.fontSizeverySmall};
+  font-size: ${(props) => props.theme.fontSize.verySmall};
 `;

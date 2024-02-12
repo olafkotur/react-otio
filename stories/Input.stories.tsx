@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Icon, IconName } from '../src/components/Icon';
 import {
+  CheckboxInput as CheckboxInputComponent,
   FileInput as FileInputComponent,
   NumberInput as NumberInputComponent,
   SelectInput as SelectInputComponent,
@@ -110,6 +111,45 @@ export const SelectInput = () => {
         value={value}
         onChange={setValue}
         choices={choices}
+        icon={<Icon name={IconName.PENCIL} />}
+      />
+    </>
+  );
+};
+
+export const CheckboxInput = () => {
+  const [checked, setChecked] = useState(false);
+
+  return (
+    <>
+      <CheckboxInputComponent
+        name="Checkbox input"
+        checked={checked}
+        onChange={(newChecked) => {
+          console.log(`Checkbox is now ${newChecked ? 'checked' : 'unchecked'}`);
+          setChecked(newChecked);
+        }}
+      />
+
+      <Spacer type="vertical" value={20} />
+      <CheckboxInputComponent
+        name="Checkbox input"
+        checked={checked}
+        onChange={(newChecked) => {
+          console.log(`Checkbox with label is now ${newChecked ? 'checked' : 'unchecked'}`);
+          setChecked(newChecked);
+        }}
+        label="Checkbox input with label"
+      />
+
+      <Spacer type="vertical" value={20} />
+      <CheckboxInputComponent
+        name="Checkbox input with icon"
+        checked={checked}
+        onChange={(newChecked) => {
+          console.log(`Checkbox with icon is now ${newChecked ? 'checked' : 'unchecked'}`);
+          setChecked(newChecked);
+        }}
         icon={<Icon name={IconName.PENCIL} />}
       />
     </>

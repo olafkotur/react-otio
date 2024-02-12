@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const FullContainer = styled.div`
+  height: 100%;
+  width: 100%;
+`;
+
 export const CenterContainer = styled.div`
   display: flex;
   justify-content: center;
